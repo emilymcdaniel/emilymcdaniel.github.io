@@ -67,35 +67,33 @@ function buildCharts(sample) {
     // console.log(selectedArray);
     //  5. Create a variable that holds the first sample in the array.
     var firstSample = selectedArray[0];
+    console.log(firstSample);
     var firstMetaSample = selectedMetaArray[0];
-    console.log(firstMetaSample);
+    // console.log(firstMetaSample);
     // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
     var otuIDs = firstSample.otu_ids;
-    // console.log(otuIDs);
+    console.log(otuIDs);
+    
     var otuLabels = firstSample.otu_labels;
-    // console.log(otuLabels);
+    console.log(otuLabels);
+    
     var otuValues = firstSample.sample_values;
     console.log(otuValues);
     var washFreq = firstMetaSample.wfreq;
 
     // var wFreq = washFreq.map(firstMetaSample => parseInt(firstMetaSample.wfreq))
-    console.log(washFreq);
+    // console.log(washFreq);
     // 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order  
     //  so the otu_ids with the most bacteria are last. 
     
-    var xticks = otuValues.slice(0,10).sort((a,b) => b - a);
-    var yticks = otuIDs.slice(0,10).sort((a,b) => b - a);
-    otuLabels.slice(0,10);
+    var yticks = otuIDs.slice(0,10).map(otuIDs => `OTU ${otuIDs}`).reverse();
 
-    // myArray.slice(0,10).reverse().map(function(...
-
-    // var sortedTopOtu = topTenOtu.sort((a,b) => b - a);
-    
     // 8. Create the trace for the bar chart. 
     var trace = {
-      x: xticks,
+      x: otuValues.slice(0,10).reverse(),
       y: yticks,
+      text: otuLabels.slice(0,10).reverse(),
       type: "bar",
       orientation: "h"
     };
